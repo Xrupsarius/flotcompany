@@ -6,4 +6,7 @@ import ru.company.flot.entity.Flight;
 import java.util.UUID;
 
 public interface FlightRepository extends CrudRepository<Flight, UUID> {
+
+    Flight findByStartFlightAndEndFlight(String startTime, String endTime);
+
 }

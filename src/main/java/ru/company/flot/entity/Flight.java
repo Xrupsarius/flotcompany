@@ -32,9 +32,9 @@ public class Flight {
     private String airportTo;
 
     @Column(name = "start_flight")
-    private ZonedDateTime startFlight;
+    private String startFlight;
 
     @Column(name = "end_flight")
-    private ZonedDateTime endFlight;
+    private String endFlight;
 
 }

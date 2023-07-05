@@ -9,4 +9,5 @@ public interface PairingService {
 
     List<Pairing> uploadPairings(RootJsonRosterDto rosterDto);
 
+    List<Pairing> getAllPairingsByEmployeeId(Integer employeeId);
 }

@@ -11,6 +11,7 @@ import ru.company.flot.repository.AssignmentRepository;
 import ru.company.flot.repository.PairingRepository;
 import ru.company.flot.service.PairingService;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,6 +26,9 @@ public class PairingServiceImpl implements PairingService {
     @Override
     @Transactional
     public List<Pairing> uploadPairings(RootJsonRosterDto rosterDto) {
+        if (rosterDto.getPairings().isEmpty()) return Collections.emptyList();
+        if (rosterDto.getAssignments().isEmpty()) return Collections.emptyList();
+
         List<Pairing> pairings = rosterDto.getPairings().stream()
                 .map(roster -> Pairing.builder()
                         .id(roster.getId())
@@ -48,5 +52,18 @@ public class PairingServiceImpl implements PairingService {
         assignmentRepository.saveAll(assignments);
         log.info("Saved assignments to db - {}", assignments);
         return pairings;
+    }
+
+    @Override
+    @Transactional
+    public List<Pairing> getAllPairingsByEmployeeId(Integer employeeId) {
+        List<Integer> pairingIds = assignmentRepository.findByEmployeeId(employeeId)
+                .stream()
+                .map(Assignment::getPairingId)
+                .toList();
+        log.info("Get the all pairing ids from assignments - {}", pairingIds);
+        List<Pairing> allByIdsIn = repository.findAllByIdIn(pairingIds);
+        log.info("Find for employee with id - {} - all pairings - {}", employeeId, pairingIds);
+        return allByIdsIn;
     }
 }

@@ -9,4 +9,5 @@ public interface FlightService {
 
     List<Flight> uploadFlights(RootJsonFlightDto flightDto);
 
+    List<Flight> getAllFlightsByEmployeeId(Integer employeeId);
 }

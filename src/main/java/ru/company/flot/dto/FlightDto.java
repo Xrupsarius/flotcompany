@@ -1,12 +1,14 @@
 package ru.company.flot.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-
-import java.time.ZonedDateTime;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class FlightDto {
 
@@ -23,9 +25,9 @@ public class FlightDto {
     private String stationArrival;
 
     @JsonProperty("DateTimeDeparture")
-    private ZonedDateTime dateTimeDeparture;
+    private String dateTimeDeparture;
 
     @JsonProperty("DateTimeArrival")
-    private ZonedDateTime dateTimeArrival;
+    private String dateTimeArrival;
 
 }

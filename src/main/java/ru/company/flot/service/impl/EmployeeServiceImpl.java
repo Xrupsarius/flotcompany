@@ -9,6 +9,7 @@ import ru.company.flot.entity.Employee;
 import ru.company.flot.repository.EmployeeRepository;
 import ru.company.flot.service.EmployeeService;
 
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -21,6 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public List<Employee> uploadEmployees(RootJsonEmployeeDto employeeDto) {
+        if (employeeDto.getEmployees().isEmpty()) return Collections.emptyList();
         List<Employee> employees = employeeDto.getEmployees().stream().map(empl -> Employee.builder()
                 .id(empl.getId())
                 .gender(empl.getGender())
