@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface PairingService {
 
-    List<Pairing> downloadPairings(RootJsonRosterDto rosterDto);
+    List<Pairing> uploadPairings(RootJsonRosterDto rosterDto);
 
 }

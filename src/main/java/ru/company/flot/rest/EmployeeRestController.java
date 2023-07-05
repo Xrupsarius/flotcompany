@@ -17,10 +17,10 @@ public class EmployeeRestController {
 
     private final EmployeeService employeeService;
 
-    @PostMapping("/download")
-    public List<Employee> downloadEmployees(@RequestBody RootJsonEmployeeDto employeeDto) {
-        log.info("We get the root object - {}", employeeDto);
-        return employeeService.downloadEmployees(employeeDto);
+    @PostMapping("/upload")
+    public List<Employee> uploadEmployees(@RequestBody RootJsonEmployeeDto employeeDto) {
+        log.info("Started uploading employees.");
+        return employeeService.uploadEmployees(employeeDto);
     }
 
 }

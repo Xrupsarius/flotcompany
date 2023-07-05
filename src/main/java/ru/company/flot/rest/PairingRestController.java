@@ -20,9 +20,10 @@ public class PairingRestController {
 
     private final PairingService service;
 
-    @PostMapping("/download")
-    public List<Pairing> downloadPairings(@RequestBody RootJsonRosterDto rosterDto) {
-        return service.downloadPairings(rosterDto);
+    @PostMapping("/upload")
+    public List<Pairing> uploadPairings(@RequestBody RootJsonRosterDto rosterDto) {
+        log.info("Started uploading pairings and appointments.");
+        return service.uploadPairings(rosterDto);
     }
 
 }

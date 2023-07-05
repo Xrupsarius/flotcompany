@@ -5,11 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.company.flot.dto.RootJsonRosterDto;
+import ru.company.flot.entity.Assignment;
 import ru.company.flot.entity.Pairing;
+import ru.company.flot.repository.AssignmentRepository;
 import ru.company.flot.repository.PairingRepository;
 import ru.company.flot.service.PairingService;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -17,10 +20,11 @@ import java.util.List;
 public class PairingServiceImpl implements PairingService {
 
     private final PairingRepository repository;
+    private final AssignmentRepository assignmentRepository;
 
     @Override
     @Transactional
-    public List<Pairing> downloadPairings(RootJsonRosterDto rosterDto) {
+    public List<Pairing> uploadPairings(RootJsonRosterDto rosterDto) {
         List<Pairing> pairings = rosterDto.getPairings().stream()
                 .map(roster -> Pairing.builder()
                         .id(roster.getId())
@@ -29,7 +33,20 @@ public class PairingServiceImpl implements PairingService {
                         .endTime(roster.getDateTimeEnd())
                         .build()).toList();
         repository.saveAll(pairings);
-        log.info("Saved to pairing table datas - {}", pairings);
+        log.info("Uploaded pairings to table - {}", pairings);
+        log.info("Started saving assignments");
+
+        List<Assignment> assignments = rosterDto.getAssignments().stream()
+                .map(assignmentDto -> Assignment.builder()
+                        .id(UUID.randomUUID())
+                        .employeeId(assignmentDto.getEmployeeId())
+                        .pairingId(assignmentDto.getPairingId())
+                        .rank(assignmentDto.getRank())
+                        .build()
+                )
+                .toList();
+        assignmentRepository.saveAll(assignments);
+        log.info("Saved assignments to db - {}", assignments);
         return pairings;
     }
 }

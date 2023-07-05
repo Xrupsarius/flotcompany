@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    List<Employee> downloadEmployees(RootJsonEmployeeDto employeeDto);
+    List<Employee> uploadEmployees(RootJsonEmployeeDto employeeDto);
 
 }

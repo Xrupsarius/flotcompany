@@ -10,8 +10,10 @@ public class EmployeeDto {
 
     @JsonProperty("ID")
     private Integer id;
+
     @JsonProperty("Gender")
     private String gender;
+
     @JsonProperty("Fleet")
     private String fleet;
 

@@ -5,16 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RootJsonRosterDto {
+public class AssignmentDto {
 
-    @JsonProperty("Pairings")
-    private List<PairingDto> pairings;
 
-    @JsonProperty("Assignments")
-    private List<AssignmentDto> assignments;
+    @JsonProperty("EmployeeID")
+    private Integer employeeId;
+
+    @JsonProperty("PairingID")
+    private Integer pairingId;
+
+    @JsonProperty("Rank")
+    private String rank;
+
 }
